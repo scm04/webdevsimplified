@@ -67,7 +67,7 @@ const DEFAULT_GROUPS = {
 	Doing: [],
 	Done: []
 } as Groups
-const groups = loadGroups()
+let groups = loadGroups()
 
 function loadGroups() {
 	let groups = localStorage.getItem(GROUPS_STORAGE_KEY) ?? DEFAULT_GROUPS
@@ -79,15 +79,10 @@ function saveGroups() {
 }
 
 // Challenge: Make the groups draggable so they can be reordered by the user
-// Challenge: Make the group name editable (use TS and CSS to swap a text element with an input)
-// NOTE: Input is in place for the group name.
-// TODO: When the display span is clicked, swap the span with the input.
-// TODO: If the escape key is pressed while in the input, clear the input and swap to the span.
-// TODO: If the enter key is pressed while in the input, update the span, clear the input, and swap to the span.
-// TODO: If the save button is clicked, update the span, clear the input, and swap to the span.
-const DEFAULT_FORM_PLACEHOLDER = "Item Name"
+// (DONE) Challenge: Make the group name editable (use TS and CSS to swap a text element with an input)
+const DEFAULT_ITEM_FORM_PLACEHOLDER = "Item Name"
 const FORM_PLACEHOLDER =
-	GROUPS_ELEMENT.dataset.itemFormPlaceholder ?? DEFAULT_FORM_PLACEHOLDER
+	GROUPS_ELEMENT.dataset.itemFormPlaceholder ?? DEFAULT_ITEM_FORM_PLACEHOLDER
 const GROUP_TEMPLATE = document.querySelector(
 	"[data-group-template]"
 ) as HTMLTemplateElement
@@ -97,6 +92,49 @@ function createGroupElement(groupName: string) {
 
 	const name = groupElement.querySelector("[data-name]") as HTMLSpanElement
 	name.textContent = groupName
+
+	const nameEditor = groupElement.querySelector(
+		"[data-group-name-editor]"
+	) as HTMLSpanElement
+	const nameInput = nameEditor.querySelector("[data-name-input]") as HTMLInputElement
+
+	name.addEventListener("click", () => {
+		name.classList.add("hide")
+		nameEditor.classList.remove("hide")
+		nameInput.placeholder = name.textContent as string
+		nameInput.focus()
+	})
+	function updateGroupName(newName: string) {
+		const oldName = name.textContent as string
+		let newGroups = {} as Groups
+		for (const group in groups) {
+			newGroups[group === oldName ? newName : group] = groups[group]
+		}
+		groups = newGroups
+		saveGroups()
+
+		name.textContent = newName
+	}
+	function hideGroupNameEditor() {
+		nameInput.value = ""
+		nameEditor.classList.add("hide")
+		name.classList.remove("hide")
+	}
+	nameEditor.addEventListener("keyup", e => {
+		if (e.key !== "Escape" && e.key !== "Enter") return
+		if (e.key === "Enter" && nameInput.value !== "") {
+			updateGroupName(nameInput.value)
+		}
+		hideGroupNameEditor()
+	})
+
+	const saveNameButton = nameEditor.querySelector(
+		"[data-save-name-button]"
+	) as HTMLButtonElement
+	saveNameButton.addEventListener("click", () => {
+		if (nameInput.value !== "") updateGroupName(nameInput.value)
+		hideGroupNameEditor()
+	})
 
 	const deleteButton = groupElement.querySelector(
 		"[data-delete-group-button]"
