@@ -79,7 +79,10 @@ function saveGroups() {
 }
 
 // Challenge: Make the groups draggable so they can be reordered by the user
-// (DONE) Challenge: Make the group name editable (use TS and CSS to swap a text element with an input)
+// Challenge: Make the group name editable
+// Once the new edit/delete menu is in the HTML, do the following:
+// TODO: Remove the "click to edit" functionality.
+// TODO: Set up the edit button so that it triggers edit mode.
 const DEFAULT_ITEM_FORM_PLACEHOLDER = "Item Name"
 const FORM_PLACEHOLDER =
 	GROUPS_ELEMENT.dataset.itemFormPlaceholder ?? DEFAULT_ITEM_FORM_PLACEHOLDER
@@ -99,7 +102,6 @@ function createGroupElement(groupName: string) {
 	const nameInput = nameEditor.querySelector("[data-name-input]") as HTMLInputElement
 
 	name.addEventListener("click", () => {
-		name.classList.add("hide")
 		nameEditor.classList.remove("hide")
 		nameInput.placeholder = name.textContent as string
 		nameInput.focus()
@@ -118,7 +120,6 @@ function createGroupElement(groupName: string) {
 	function hideGroupNameEditor() {
 		nameInput.value = ""
 		nameEditor.classList.add("hide")
-		name.classList.remove("hide")
 	}
 	nameEditor.addEventListener("keyup", e => {
 		if (e.key !== "Escape" && e.key !== "Enter") return
