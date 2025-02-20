@@ -90,25 +90,33 @@ header {
 	max-width: 16rem;
 }
 
+/* TODO: Style the edit/delete menu and adjust other styles as needed. */
 .group-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	column-gap: 0.25rem;
-	place-items: center;
 	text-align: center;
 	background-color: #333;
 	color: white;
 	padding: 0.25rem;
-	[data-name],
-	.group-name-editor {
-		grid-column-start: 2;
+	.group-name-display {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: 1 / -1;
+		place-items: center;
+		.name {
+			grid-column-start: 2;
+		}
+		.icon-button {
+			justify-self: end;
+		}
 	}
-	[data-delete-group-button] {
-		justify-self: end;
-	}
 	.group-name-editor {
-		grid-row: 1;
+		grid-column: span 3;
 		display: flex;
+		.group-input {
+			flex-grow: 1;
+		}
 		.icon-button {
 			border-radius: 0 0.25rem 0.25rem 0;
 			margin-left: 0;
@@ -117,8 +125,7 @@ header {
 			:is(.group-input, .icon-button) {
 				display: none;
 			}
-			[data-name]:has(+ :not(&)),
-			:not(&) + [data-delete-group-button] {
+			:not(&) + .group-name-display {
 				display: none;
 			}
 		}
@@ -131,11 +138,11 @@ header {
 	overflow-y: auto;
 }
 
+/* TODO: Style the edit/delete menu and finish styling the editor using the group template as a starting point. */
 .item {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 	column-gap: 0.25rem;
-	place-items: center;
 	padding: 0.25rem;
 	border-radius: 0.25rem;
 	background-color: white;
@@ -143,21 +150,29 @@ header {
 	margin: 0.25rem 0;
 	text-align: center;
 	word-wrap: break-word;
-
-	[data-item-text] {
-		grid-column-start: 2;
+	.item-display,
+	.item-editor {
 		pointer-events: none;
 	}
-
-	[data-delete-item-button] {
-		width: 1.5rem;
-		height: 1.5rem;
-		justify-self: end;
-		box-shadow: none;
-		padding: 0.25rem;
-		svg {
-			width: 1.125rem;
-			height: 1.125rem;
+	.item-display {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: 1 / -1;
+		place-items: center;
+		.item-text {
+			grid-column-start: 2;
+		}
+		.icon-button {
+			justify-self: end;
+			width: 1.5rem;
+			height: 1.5rem;
+			justify-self: end;
+			box-shadow: none;
+			padding: 0.25rem;
+			svg {
+				width: 1.125rem;
+				height: 1.125rem;
+			}
 		}
 	}
 }

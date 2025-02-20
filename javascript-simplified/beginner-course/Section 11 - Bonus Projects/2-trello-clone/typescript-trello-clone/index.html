@@ -34,10 +34,10 @@
     </div>
   </header>
   <div class="groups" data-groups data-item-form-placeholder="Task Name" data-tooltip-observe></div>
+  <!-- TODO: Move the delete button into a "..."-style menu and add an edit button. -->
   <template data-group-template>
     <div class="group">
       <div class="group-header">
-        <span data-name></span>
         <span class="group-name-editor hide" data-group-name-editor>
           <input type="text" class="group-input" placeholder="Group Name" data-name-input />
           <button class="icon-button" data-save-name-button data-tooltip="Save group name">
@@ -46,11 +46,14 @@
             </svg>
           </button>
         </span>
-        <button class="icon-button" data-delete-group-button data-tooltip="Delete group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <use href="#trash-can-outline"></use>
-          </svg>
-        </button>
+        <span class="group-name-display">
+          <span class="name" data-name></span>
+          <button class="icon-button" data-delete-group-button data-tooltip="Delete group">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <use href="#trash-can-outline"></use>
+            </svg>
+          </button>
+        </span>
       </div>
       <div class="items" data-items data-drop-zone data-tooltip-observe></div>
       <form data-new-item-form>
@@ -58,14 +61,25 @@
       </form>
     </div>
   </template>
+  <!-- TODO: Update this layout once I've got the "edit/delete" menu implemented on the group template. -->
   <template data-item-template>
     <div class="item" data-draggable>
-      <div data-item-text></div>
-      <button class="icon-button" data-delete-item-button data-tooltip="Delete item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <use href="#close"></use>
-        </svg>
-      </button>
+      <span class="item-editor hide" data-item-editor>
+        <input type="text" class="item-editor-input" placeholder="Group Name" data-item-editor-input />
+        <button class="icon-button" data-save-name-button data-tooltip="Save item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <use href="#content-save"></use>
+          </svg>
+        </button>
+      </span>
+      <span class="item-display">
+        <div class="item-text" data-item-text></div>
+        <button class="icon-button" data-delete-item-button data-tooltip="Delete item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <use href="#close"></use>
+          </svg>
+        </button>
+      </span>
     </div>
   </template>
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
