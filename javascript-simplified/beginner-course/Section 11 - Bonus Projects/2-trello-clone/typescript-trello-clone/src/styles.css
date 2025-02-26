@@ -213,3 +213,37 @@ header {
 .hide {
 	display: none;
 }
+
+/*
+	TODO: make the cursor change when hovering over each of the buttons
+	TODO: add a hover state to the buttons to darken the background slightly
+	TODO: make sure the hover state also applies when navigating with the keyboard (focus-within, I think?)
+ */
+.options-menu {
+	display: flex;
+	flex-direction: column;
+	width: 8rem;
+	overflow: hidden;
+	button {
+		border: none;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.125rem;
+		place-items: center;
+		font-size: 1.125rem;
+		svg {
+			width: 1.25rem;
+		}
+		span {
+			justify-self: start;
+			padding-top: 0.25rem;
+		}
+	}
+	.edit-button {
+		border-radius: 0.5rem 0.5rem 0 0;
+		border-bottom: 1px solid #aaa;
+	}
+	.delete-button {
+		border-radius: 0 0 0.5rem 0.5rem;
+	}
+}
