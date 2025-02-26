@@ -82,6 +82,24 @@
       </span>
     </div>
   </template>
+  <!-- TODO: Add the "popover" attribute -->
+  <!-- TODO: In the TS for creating a group, set the ID for the popover and link the menu button to it. -->
+  <!-- TODO: In the TS for creating an item, set the ID for the popover and link the menu button to it. -->
+  <!-- TODO: In the TS, each menu button should set the positioning of the popover when it is clicked to open the popover. -->
+  <div class="options-menu">
+    <button class="edit-button" data-edit-button>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <use href="#pencil"></use>
+      </svg>
+      <span>Edit</span>
+    </button>
+    <button class="delete-button" data-delete-button>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <use href="#trash-can-outline"></use>
+      </svg>
+      <span>Delete</span>
+    </button>
+  </div>
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
     <path id="add" d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" />
     <path id="download" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
@@ -92,6 +110,10 @@
       d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
     <path id="close"
       d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+    <path id="dots-horizontal"
+      d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+    <path id="pencil"
+      d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
   </svg>
 </body>
 </html>
